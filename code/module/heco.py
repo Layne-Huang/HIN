@@ -22,17 +22,29 @@ class HeCo(nn.Module):
         self.mp = Mp_encoder(P, hidden_dim, attn_drop)
         self.sc = Sc_encoder(hidden_dim, sample_rate, nei_num, attn_drop)      
         self.contrast = Contrast(hidden_dim, tau, lam)
+        self.classifier = nn.Linear(hidden_dim, 1)
 
-    def forward(self, feats, pos, mps, nei_index):  # p a s
+    def forward(self, feats, pos, mps, nei_index, label):  # p a s
         h_all = []
         for i in range(len(feats)):
             h_all.append(F.elu(self.feat_drop(self.fc_list[i](feats[i]))))
         z_mp = self.mp(h_all[0], mps)
         z_sc = self.sc(h_all, nei_index)
+        # z_pred = self.classifier(z_mp)
         loss = self.contrast(z_mp, z_sc, pos)
+        # loss = loss + F.binary_cross_entropy_with_logits(z_pred, label)
         return loss
 
     def get_embeds(self, feats, mps):
         z_mp = F.elu(self.fc_list[0](feats[0]))
         z_mp = self.mp(z_mp, mps)
         return z_mp.detach()
+    
+    def predict(self, feats, mps, nei_index):
+        h_all = []
+        for i in range(len(feats)):
+            h_all.append(F.elu(self.feat_drop(self.fc_list[i](feats[i]))))
+        z_mp = self.mp(h_all[0], mps)
+        z_sc = self.sc(h_all, nei_index)
+        z_pred = self.classifier(z_mp)
+        return z_pred

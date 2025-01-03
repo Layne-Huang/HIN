@@ -17,7 +17,7 @@ def acm_params():
     parser.add_argument('--gpu', type=int, default=0)
     parser.add_argument('--seed', type=int, default=0)
     parser.add_argument('--hidden_dim', type=int, default=64)
-    parser.add_argument('--nb_epochs', type=int, default=1)
+    parser.add_argument('--nb_epochs', type=int, default=100000)
     
     # The parameters of evaluation
     parser.add_argument('--eva_lr', type=float, default=0.05)
@@ -116,7 +116,7 @@ def freebase_params():
     parser.add_argument('--gpu', type=int, default=0)
     parser.add_argument('--seed', type=int, default=32)
     parser.add_argument('--hidden_dim', type=int, default=64)
-    parser.add_argument('--nb_epochs', type=int, default=10000)
+    parser.add_argument('--nb_epochs', type=int, default=1)
     
     # The parameters of evaluation
     parser.add_argument('--eva_lr', type=float, default=0.01)
@@ -148,14 +148,14 @@ def huya_params():
     parser.add_argument('--gpu', type=int, default=0)
     parser.add_argument('--seed', type=int, default=0)
     parser.add_argument('--hidden_dim', type=int, default=64)
-    parser.add_argument('--nb_epochs', type=int, default=1000)
+    parser.add_argument('--nb_epochs', type=int, default=100000)
     
     # The parameters of evaluation
-    parser.add_argument('--eva_lr', type=float, default=0.05)
+    parser.add_argument('--eva_lr', type=float, default=0.001)
     parser.add_argument('--eva_wd', type=float, default=0)
     
     # The parameters of learning process
-    parser.add_argument('--patience', type=int, default=20)
+    parser.add_argument('--patience', type=int, default=100)
     parser.add_argument('--lr', type=float, default=0.0008)
     parser.add_argument('--l2_coef', type=float, default=0)
     

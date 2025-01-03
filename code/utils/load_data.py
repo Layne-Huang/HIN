@@ -82,7 +82,7 @@ def load_acm(ratio, type_num):
     return [nei_a, nei_s], [feat_p, feat_a, feat_s], [pap, psp], pos, label, train, val, test
 
 def load_huya(ratio, type_num):
-    path = "../data/huya/"
+    path = "./data/huya/"
     label = np.load(path + "labels.npy").astype('int32')
     label = encode_onehot(label)
     nei_i = np.load(path + "nei_i.npy", allow_pickle=True)
