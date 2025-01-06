@@ -64,6 +64,7 @@ def train():
     best_t = 0
 
     starttime = datetime.datetime.now()
+    model_path = f'HeCo_'+own_str+'_'+str(args.ratio[0])+'_'+'.pkl'
     # args.nb_epochs = 1
     for epoch in range(args.nb_epochs):
         model.train()
@@ -74,7 +75,7 @@ def train():
             best = loss
             best_t = epoch
             cnt_wait = 0
-            torch.save(model.state_dict(), 'HeCo_'+own_str+'.pkl')
+            torch.save(model.state_dict(), model_path)
         else:
             cnt_wait += 1
 
@@ -85,7 +86,7 @@ def train():
         optimiser.step()
         
     print('Loading {}th epoch'.format(best_t))
-    model.load_state_dict(torch.load('HeCo_'+own_str+'.pkl'))
+    model.load_state_dict(torch.load(model_path))
     model.eval()
     # os.remove('HeCo_'+own_str+'.pkl')
     '''
@@ -107,6 +108,7 @@ def train():
 def test():
     nei_index, feats, mps, pos, label, idx_train, idx_val, idx_test = \
         load_data(args.dataset, args.ratio, args.type_num)
+    model_path = f'HeCo_'+own_str+'_'+str(args.ratio[0])+'_'+'.pkl'
     nb_classes = label.shape[-1]
     feats_dim_list = [i.shape[1] for i in feats]
     P = int(len(mps))
@@ -135,7 +137,7 @@ def test():
     best_t = 0
         
     print('Loading model')
-    model.load_state_dict(torch.load('HeCo_'+own_str+'.pkl'))
+    model.load_state_dict(torch.load(model_path))
     model.eval()
   
     embeds = model.get_embeds(feats, mps)
@@ -144,5 +146,5 @@ def test():
                  args.eva_lr, args.eva_wd)
 
 if __name__ == '__main__':
-    # train()
-    test()
+    train()
+    # test()

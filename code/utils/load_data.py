@@ -50,7 +50,7 @@ def is_every_row_non_zero(matrix):
 
 def load_acm(ratio, type_num):
     # The order of node types: 0 p 1 a 2 s
-    path = "../data/acm/"
+    path = "./data/acm/"
     label = np.load(path + "labels.npy").astype('int32') # 4019x30, the paper is the node to be classified
     label = encode_onehot(label)
     nei_a = np.load(path + "nei_a.npy", allow_pickle=True) # 4019, # the author neighbors of paper

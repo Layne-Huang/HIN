@@ -24,7 +24,7 @@ class HeCo(nn.Module):
         self.contrast = Contrast(hidden_dim, tau, lam)
         self.classifier = nn.Linear(hidden_dim, 1)
 
-    def forward(self, feats, pos, mps, nei_index, label):  # p a s
+    def forward(self, feats, pos, mps, nei_index):  # p a s
         h_all = []
         for i in range(len(feats)):
             h_all.append(F.elu(self.feat_drop(self.fc_list[i](feats[i]))))

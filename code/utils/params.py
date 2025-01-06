@@ -144,7 +144,7 @@ def huya_params():
     parser.add_argument('--save_emb', action="store_true")
     parser.add_argument('--turn', type=int, default=0)
     parser.add_argument('--dataset', type=str, default="huya")
-    parser.add_argument('--ratio', type=int, default=[70])
+    parser.add_argument('--ratio', type=int, default=[20])
     parser.add_argument('--gpu', type=int, default=0)
     parser.add_argument('--seed', type=int, default=0)
     parser.add_argument('--hidden_dim', type=int, default=64)
