@@ -9,6 +9,8 @@ import os
 import random
 from sklearn.utils.class_weight import compute_class_weight
 
+os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
+torch.cuda.device_count()
 
 warnings.filterwarnings('ignore')
 args = set_params()
@@ -17,6 +19,8 @@ if torch.cuda.is_available():
     torch.cuda.set_device(args.gpu)
 else:
     device = torch.device("cpu")
+
+# device = torch.device("cpu")
 
 ## name of intermediate document ##
 own_str = args.dataset

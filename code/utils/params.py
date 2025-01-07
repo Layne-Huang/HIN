@@ -167,7 +167,8 @@ def huya_params():
     parser.add_argument('--lam', type=float, default=0.5)
     
     args, _ = parser.parse_known_args()
-    args.type_num = [5558, 5479, 2]  # the number of every node type
+    # args.type_num = [5558, 5479, 2]  # the number of every node type， needs to be modified according to the dataset
+    args.type_num = [11196, 6810, 5]
     args.nei_num = 2  # the number of neighbors' types
     return args
 
